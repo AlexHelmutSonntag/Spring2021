@@ -1,2 +1,1 @@
-Implement the polynomial type. Represent a polynomial as a sequence of its realvalued coefficients. Implement as methods: adding two polynomials, multiplying two
-polynomials, evaluating the polynomial (substituting a value to the variable).
+Implement the polynomial type. Represent a polynomial as a sequence of its real valued coefficients. Implement as methods: adding two polynomials, multiplying two polynomials, evaluating the polynomial (substituting a value to the variable).
