@@ -1,29 +1,32 @@
-#ifndef POLYNOMIAL_H_INCLUDED
-#define POLYNOMIAL_H_INCLUDED
+#ifndef POLYNOMIAL_H
+#define POLYNOMIAL_H
+
+
 
 #include "polynomial.h"
 #include<vector>
 #include<math.h>
-#include< iostream>
 
 class Polynomial{
 
 public:
 
+    enum PolynomialError{WRONG_DEGREE};
     int getSize();
     Polynomial();
-    Polynomial(int degree);
-    void setCoeff(int degree,double num);
-    Polynomial multiply(Polynomial p1, Polynomial p2);
-    Polynomial add(Polynomial p1, Polynomial p2);
-    Polynomial subtract(Polynomial p1, Polynomial p2);
+    Polynomial(int degree,const std::vector<double>& vec);
+    /*Polynomial setCoeff(int degree,double num);*/
+    Polynomial multiply(const Polynomial& p1);
+    Polynomial add(const Polynomial& p1);
+    Polynomial subtract(const Polynomial& p1);
     double evaluate(double x);
     void print();
 
-    
+
 
 private:
     std::vector<double> _vec;
     int _degree;
 };
-#endif // POLYNOMIAL_H_INCLUDED
+
+#endif // POLYNOMIAL_H
