@@ -2,7 +2,7 @@
 #include "Menu.h"
 #include "Polynomial.h"
 #include <sstream>
-#define menuCount 4
+#define menuCount 6
 
 using namespace std;
 
@@ -30,6 +30,9 @@ void Menu:: run()
             case 5:
                 evaluateMenu();
                 break;
+            case 6:
+                printPolys();
+                break;
             default:
                 cout<<"\nGoodbye!\n";
                 break;
@@ -46,9 +49,10 @@ int Menu::printMenu()
     cout<<"0 Exit\n";
     cout<<"1. Input\n";
     cout<<"2. Add\n";
-    cout<<"2. Subtract\n";
-    cout<<"3. Multiply\n";
-    cout<<"4. Evaluate\n";
+    cout<<"3. Subtract\n";
+    cout<<"4. Multiply\n";
+    cout<<"5. Evaluate\n";
+    cout<<"6. Print\n";
     cout<<"****************************************\n";
     //produce error message
 
@@ -60,15 +64,28 @@ int Menu::printMenu()
     }
 
     //read using read.hpp
-    while(s<0 || s> 4);
+    while(s<0 || s> 6);
     //response=read<int>("Choice:",errmsg,check);
 
     return s;
 }
+
+void Menu::printPolys()
+{   if(database.size()<=0) throw EMPTY_DATABASE;
+    else
+        {
+            for(int i=0;i<database.size();i++)
+            {
+                database[i].print();
+            }
+        }
+
+}
 void Menu::inputMenu(){
     vector<double> vec1;
+    vec1.clear();
     int vecSize;
-    cout<<"Please input the degree of your 1st polynomial: "<<endl;
+    cout<<"Please input the degree of your polynomial: "<<endl;
     cin>>vecSize;
     for (int i = 0; i < vecSize+1; i++)
     {
@@ -79,7 +96,6 @@ void Menu::inputMenu(){
     }
     Polynomial poly1(vecSize,vec1);
     database.push_back(poly1);
-
     vector<double> vec2;
     vecSize=0;
     cout<<"Please input the degree of your 2nd polynomial: "<<endl;
@@ -94,41 +110,49 @@ void Menu::inputMenu(){
     Polynomial poly2(vecSize,vec2);
     database.push_back(poly2);
 
-
 }
 void Menu::multiplyMenu(){
-    Polynomial output = database[1].multiply(database[0]);
+    if(database.size()!=2) throw EMPTY_DATABASE;
+    else{
+    output = database[1].multiply(database[0]);
     output.print();
+    }
 }
 void Menu :: addMenu(){
-    Polynomial output = database[1].add(database[0]);
+    if(database.size()!=2) throw EMPTY_DATABASE;
+    else{
+    output = database[1].add(database[0]);
     output.print();
-
+    }
 }
 void Menu :: subtractMenu(){
-    Polynomial output = database[1].subtract(database[0]);
+    if(database.size()!=2) throw EMPTY_DATABASE;
+    else{
+    output = database[1].subtract(database[0]);
     output.print();
+    }
 }
 void Menu::evaluateMenu()
 {
+
     int x;
     cout<<"Please input x: ";
     cin>>x;
-    cout<<"Please choose the polynomial(1 is first you inputted,2 being 2nd inputted: ";
-    int order;
-    cin>>order;
-    if (order ==1)
-    {
-    database[order].evaluate(x);
-    database[order].print();
-    }
-    else if(order==2){
-
-    database[0].evaluate(x);
-    database[0].print();
-    }
+    cout<<"Please choose the polynomial you want to evaluate! 1 being the 1st you inputted. 2 being the 2nd you inputted >";
+    int input;
+    cin>>input;
+    if (input ==-1)throw WRONG_INPUT;
     else{
-        throw WRONG_INPUT;
+        if(input ==1 ){
+    database[input].print();
+    cout<<database[input].evaluate(x);
     }
 
+    else if(input==2){
+
+    database[0].print();
+    cout<<database[0].evaluate(x);
+
+        }
+    }
 }
