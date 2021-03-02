@@ -8,9 +8,11 @@ using namespace std;
 
 int main()
 {
+
+
     Menu test;
     test.run();
-    /*
+/*
     vector<double> vec1;
     vec1.push_back(1.0);
     vec1.push_back(3.0);
@@ -55,7 +57,6 @@ int main()
     Polynomial poly4(3,vec3);
     cout<<poly4.getSize()<<endl;
     poly4.print();
-
 */
 
 
