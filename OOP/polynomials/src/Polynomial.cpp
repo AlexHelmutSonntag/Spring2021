@@ -7,6 +7,7 @@ Polynomial::Polynomial()
     _degree = 0;
     _vec.resize(0);
 }
+
 Polynomial::Polynomial(const Polynomial& input)
 {
     _degree = input._degree;
