@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1614690735 source:/home/ali/Desktop/Spring2021/OOP/Assignmentone/polynomials/main.cpp
+	<iostream>
+	<vector>
+	"Polynomial.h"
+	"Menu.h"
+
+1614685974 /home/ali/Desktop/Spring2021/OOP/Assignmentone/polynomials/include/Polynomial.h
+	"Polynomial.h"
+	<vector>
+	<math.h>
+
+1614691110 source:/home/ali/Desktop/Spring2021/OOP/Assignmentone/polynomials/src/Menu.cpp
+	<iostream>
+	"Menu.h"
+	"Polynomial.h"
+	<sstream>
+
+1614689872 /home/ali/Desktop/Spring2021/OOP/Assignmentone/polynomials/include/Menu.h
+	"Polynomial.h"
+	<vector>
+
+1614688372 source:/home/ali/Desktop/Spring2021/OOP/Assignmentone/polynomials/src/Polynomial.cpp
+	"Polynomial.h"
+	<iostream>
+
