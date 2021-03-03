@@ -12,6 +12,26 @@ int main()
 
     Menu test;
     test.run();
+    // vector<double> vec1;
+    // vec1.push_back(1.0);
+    // vec1.push_back(3.0);
+    // vec1.push_back(2.0);
+    // cout<<"Vec size "<<vec1.size()<<endl;
+
+    // Polynomial poly1(vec1.size()-1,vec1);
+
+    // poly1.print();
+    // cout<<poly1.getSize()<<endl;
+
+    // vector<double> vec2;
+    // vec2.push_back(4.0);
+    // vec2.push_back(2.0);
+    // vec2.push_back(3.0);
+    // vec2.push_back(3.0);
+    // Polynomial poly2(vec2.size()-1,vec2);
+    // poly2.print();
+    // cout<<poly2.getSize()<<endl;
+
 /*
     vector<double> vec1;
     vec1.push_back(1.0);
