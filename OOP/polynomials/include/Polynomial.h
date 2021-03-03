@@ -25,7 +25,7 @@ public:
 
 private:
     std::vector<double> _vec;
-    int _degree;
+    int _degree=0;
 };
 
 #endif // POLYNOMIAL_H
