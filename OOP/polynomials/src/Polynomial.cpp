@@ -1,111 +1,165 @@
+#include <iostream>
+#include <algorithm>
+#include <sstream>
+#include "Menu.h"
 #include "Polynomial.h"
-#include<iostream>
+#define menuCount 6
+
 using namespace std;
 
-Polynomial::Polynomial()
+bool check(int a){return (a>=0 && a<=5);}
+
+void Menu:: run()
 {
-    _degree = 0;
-    _vec.resize(0);
+    int v;
+    do{
+        v = printMenu();
+        switch(v)
+        {
+            case 1:
+                inputMenu();
+                break;
+            case 2:
+                addMenu();
+                break;
+            case 3:
+                subtractMenu();
+                break;
+            case 4:
+                multiplyMenu();
+                break;
+            case 5:
+                evaluateMenu();
+                break;
+            case 6:
+                printPolys();
+                break;
+            default:
+                cout<<"\nGoodbye!\n";
+                break;
+
+        }
+    }while(v!=0);
+
 }
 
-Polynomial::Polynomial(const Polynomial& input)
+int Menu::printMenu()
 {
-    _degree = input._degree;
-    _vec = input._vec;
+    //int response;
+    cout<<"\n****************************************\n";
+    cout<<"0 Exit\n";
+    cout<<"1. Input\n";
+    cout<<"2. Add\n";
+    cout<<"3. Subtract\n";
+    cout<<"4. Multiply\n";
+    cout<<"5. Evaluate\n";
+    cout<<"6. Print\n";
+    cout<<"****************************************\n";
+    //produce error message
 
+    int s=0;
+    do {
+
+    cout<<"It has to be a number between 0 and "<<menuCount<<"!"<<endl;
+    cin>>s;
+    }
+
+    //read using read.hpp
+    while(s<0 || s> 6);
+    //response=read<int>("Choice:",errmsg,check);
+
+    return s;
 }
 
-Polynomial::Polynomial(int degree,const std::vector<double>& vec)
-{
-    if(vec.size()<=0||degree>vec.size()) throw WRONG_DEGREE;
+void Menu::printPolys()
+{   if(database.size()<=0) throw EMPTY_DATABASE;
+    else
+        {
+            for(int i=0;i<database.size();i++)
+            {
+                database[i].print();
+            }
+        }
+
+}
+void Menu::inputMenu(){
+    vector<double> vec1;
+    vec1.clear();
+    int degree;
+    cout<<"Please input the degree of your polynomial: "<<endl;
+    cin>>degree;
+    vec1.resize(degree+1);
+    for (int i = 0; i < degree+1; i++)
+    {
+        double input;
+        cout<<"Please input the coefficients(Highest degree to lowest):";
+        cin>>input;
+        //vec1.push_back(input);
+        vec1[i]=input;
+    }
+    Polynomial poly1(degree,vec1);
+    database.push_back(poly1);
+    vector<double> vec2;
+    degree=0;
+    cout<<"Please input the degree of your 2nd polynomial: "<<endl;
+    cin>>degree;
+    vec2.resize(degree+1);
+    for (int i = 0; i < degree+1; i++)
+    {
+        double input;
+        cout<<"Please input the coefficients(Highest degree to lowest):";
+        cin>>input;
+        //vec2.push_back(input);
+        vec2[i]=input;
+    }
+    Polynomial poly2(degree,vec2);
+    database.push_back(poly2);
+    //std::reverse(database.begin(), database.end());
+}
+void Menu::multiplyMenu(){
+    if(database.size()!=2) throw EMPTY_DATABASE;
     else{
-    _degree = degree;
-    _vec.resize(vec.size());
-    for (int  i = 0; i < vec.size(); i++)
-    {
-        _vec.push_back(vec[i]);
-    }
-
+    output = database[1].multiply(database[0]);
+    output.print();
     }
 }
-
-int Polynomial :: getSize(){
-    return _vec.size();
-}
-
-void Polynomial::print(){
-
-    for (int i = _degree; i >=0; i--)
-    {
-        if(_vec[i]>=0)
-        {
-            cout<<"+";
-        }
-        cout<<_vec[i]<<"X^" <<i;
+void Menu :: addMenu(){
+    if(database.size()!=2) throw EMPTY_DATABASE;
+    else{
+    output = database[1].add(database[0]);
+    output.print();
     }
-    cout<<endl;
 }
-Polynomial Polynomial:: multiply(const Polynomial &p1){
-    Polynomial return_poly;
-    int m = _vec.size();
-    int n = p1._vec.size();
-
-    int limit = m + n -1;
-    return_poly._vec.resize(limit);
-
-    for (int i =0;i<limit;i++)
-    {
-        return_poly._vec[i] = 0;
+void Menu :: subtractMenu(){
+    if(database.size()!=2) throw EMPTY_DATABASE;
+    else{
+    output = database[1].subtract(database[0]);
+    output.print();
     }
-    for (int i =0 ;i<m;i++)
-    {
-        for (int j =0;j<n;j++)
-        {
-            return_poly._vec[i]+= _vec[i]*p1._vec[j];
-        }
-    }
-    return return_poly;
-
-
 }
-Polynomial Polynomial::add(const Polynomial& p1){
-
-    Polynomial return_Poly;
-    if(p1._degree!=_degree) throw WRONG_DEGREE;
-    else
-    {
-        for(int i =p1._degree;i>=0;i--)
-        {
-            _vec[i]+=p1._vec[i];
-        }
-    }
-    return return_Poly;
-}
-
-
-Polynomial Polynomial::subtract(const Polynomial& p1){
-
-    Polynomial return_Poly;
-    if(p1._degree!=_degree) throw WRONG_DEGREE;
-    else
-    {
-        for(int i =p1._degree;i>=0;i--)
-        {
-            _vec[i]-= p1._vec[i];
-        }
-    }
-    return return_Poly;
-
-}
-double Polynomial:: evaluate(double x)
+void Menu::evaluateMenu()
 {
-    double result=0;
-    for(int i =_degree;i>0;i--)
-    {
-        result+=pow(x,i) *_vec[i];
+
+
+    int x;
+    cout<<"Please input x: ";
+    cin>>x;
+    cout<<"Please choose the polynomial you want to evaluate! 1 being the 1st you inputted. 2 being the 2nd you inputted >";
+    int input;
+    cin>>input;
+    if (input ==-1)throw WRONG_INPUT;
+    else{
+        if(input ==1 ){
+    database[0].print();
+    cout<<database[0].evaluate(x);
     }
-    result+=_vec[0];
 
-    return result;
+    else if(input==2){
+
+    database[1].print();
+    cout<<database[1].evaluate(x);
+
+            }
+        }
+
 }
-
