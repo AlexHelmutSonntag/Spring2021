@@ -1,7 +1,8 @@
 #include <iostream>
+#include <algorithm>
+#include <sstream>
 #include "Menu.h"
 #include "Polynomial.h"
-#include <sstream>
 #define menuCount 6
 
 using namespace std;
@@ -84,32 +85,36 @@ void Menu::printPolys()
 void Menu::inputMenu(){
     vector<double> vec1;
     vec1.clear();
-    int vecSize;
+    int degree;
     cout<<"Please input the degree of your polynomial: "<<endl;
-    cin>>vecSize;
-    for (int i = 0; i < vecSize+1; i++)
+    cin>>degree;
+    vec1.resize(degree+1);
+    for (int i = 0; i < degree+1; i++)
     {
         double input;
         cout<<"Please input the coefficients(Highest degree to lowest):";
         cin>>input;
-        vec1.push_back(input);
+        //vec1.push_back(input);
+        vec1[i]=input;
     }
-    Polynomial poly1(vecSize,vec1);
+    Polynomial poly1(degree,vec1);
     database.push_back(poly1);
     vector<double> vec2;
-    vecSize=0;
+    degree=0;
     cout<<"Please input the degree of your 2nd polynomial: "<<endl;
-    cin>>vecSize;
-    for (int i = 0; i < vecSize+1; i++)
+    cin>>degree;
+    vec2.resize(degree+1);
+    for (int i = 0; i < degree+1; i++)
     {
         double input;
         cout<<"Please input the coefficients(Highest degree to lowest):";
         cin>>input;
-        vec2.push_back(input);
+        //vec2.push_back(input);
+        vec2[i]=input;
     }
-    Polynomial poly2(vecSize,vec2);
+    Polynomial poly2(degree,vec2);
     database.push_back(poly2);
-
+    //std::reverse(database.begin(), database.end());
 }
 void Menu::multiplyMenu(){
     if(database.size()!=2) throw EMPTY_DATABASE;
@@ -135,6 +140,7 @@ void Menu :: subtractMenu(){
 void Menu::evaluateMenu()
 {
 
+
     int x;
     cout<<"Please input x: ";
     cin>>x;
@@ -144,15 +150,16 @@ void Menu::evaluateMenu()
     if (input ==-1)throw WRONG_INPUT;
     else{
         if(input ==1 ){
-    database[input].print();
-    cout<<database[input].evaluate(x);
+    database[0].print();
+    cout<<database[0].evaluate(x);
     }
 
     else if(input==2){
 
-    database[0].print();
-    cout<<database[0].evaluate(x);
+    database[1].print();
+    cout<<database[1].evaluate(x);
 
+            }
         }
-    }
+
 }
