@@ -2,7 +2,8 @@ import java.util.*;
 
 public class Graph {
 
-    private class Person {
+    private class Person
+    {
 
         String name;
         List<Person> friends;
@@ -12,7 +13,8 @@ public class Graph {
             this.friends = new ArrayList<>();
         }
 
-        public boolean DFS(Person p1, Person p2, Set<Person> asked) {
+        public boolean DFS(Person p1, Person p2, Set<Person> asked) 
+        {
             if (asked.contains(p1))
                 return false;
 
@@ -26,13 +28,15 @@ public class Graph {
             return false;
         }
 
-        public boolean BFS(Person p1, Person p2) {
+        public boolean BFS(Person p1, Person p2) 
+        {
             Queue<Person> nextToAsk = new LinkedList<>();
             Set<Person> asked = new HashSet<>();
             nextToAsk.add(p1);
             asked.add(p1);
 
-            while (!nextToAsk.isEmpty()) {
+            while (!nextToAsk.isEmpty()) 
+            {
                 Person needy = nextToAsk.remove();
 
                 if (needy == p2)
