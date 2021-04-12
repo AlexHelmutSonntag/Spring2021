@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1617915927 source:/home/ali/Desktop/Spring2021/OOP/LabFiles/Assignment2/Assign2/enor.cpp
+	"enor.h"
+
+1617915807 /home/ali/Desktop/Spring2021/OOP/LabFiles/Assignment2/Assign2/enor.h
+	<fstream>
+	<vector>
+	<sstream>
+	<iostream>
+
+1617915757 source:/home/ali/Desktop/Spring2021/OOP/LabFiles/Assignment2/Assign2/main.cpp
+	<iostream>
+	"enor.h"
+
