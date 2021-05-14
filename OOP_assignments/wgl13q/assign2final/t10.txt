@@ -1,0 +1,5 @@
+Jerry NOTAWINNER carp 1 carp 1 catfish 1
+Jerry SUMCONTEST carp 0 carp 0 catfish 0
+Peter LAC0512 carp 45 carp 53 catfish 96
+King LAC0512 carp 45 carp 53 catfish 96
+Larry LAC0512 carp 45 carp 53 catfish 96
