@@ -6,6 +6,7 @@ using namespace std;
 bool emptyFile(const string &fileName)
 {
 
+
     EnorSingle t(fileName);
 
     t.first();
